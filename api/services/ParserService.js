@@ -66,7 +66,7 @@ ParserService = {
               links.push("http://knews.kg/"+$(this).attr('href'));
             }
           })
-          console.log(links);
+
           callback(null, links,ht);
         }
 

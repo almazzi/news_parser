@@ -22,15 +22,26 @@ module.exports = {
                     if(!arr){
                       return callback('Net Arraya');
                     }
-
-                    Article.create(arr).exec(function (err) {
+                    Article.find({ title: arr.title }).exec(function(err,arO){
                       if(err){
                         console.log(err);
                         return callback(err);
                       }
-                      callback(null);
-                    });
-                      
+                      if(arO.length){
+                        console.log(arO.title+" хотел повториться но мы недали ");
+
+                        return callback(null);
+                      }
+                      Article.create(arr).exec(function (err) {
+                        if(err){
+                          console.log(err);
+                          return callback(err);
+                        }
+                        callback(null);
+                      });
+                    })
+
+
                   })
                 },
                 function (err) {

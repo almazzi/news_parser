@@ -8,15 +8,27 @@
 module.exports = {
 
 	show: function(req, res){
-    Article.find().exec(function (err,articles) {
+    Article.find({published:false}).exec(function (err,articles) {
       if (err) return res.serverError(err);
-      console.log(articles);
       return res.view('pokaji' ,{
         'articles': articles
 
       });
 
-    })}
+
+    })},
+  remove: function(req, res){
+    if(!req.param('id')){
+      return res.badRequest('No id provided');
+    }
+    Article.destroy({id:req.param('id')}).exec(function(err, deleted){
+      if(err){
+        return res.serverError(err);
+      }
+      console.log(deleted);
+      return res.redirect('/pokaji/');
+    });
+  }
 
 
 

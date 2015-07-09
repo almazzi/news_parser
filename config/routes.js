@@ -39,11 +39,14 @@ module.exports.routes = {
 '/search/:type/:text':{
   controller: 'Show',
   action:'check'
-},
-  '/pokaji':{
+  },
+ '/pokaji':{
     controller:'Article',
     action:'show'
-
+  },
+  '/delete/:id':{
+    controller:'Article',
+    action:'remove'
   }
   //'/searchpage':{
   //  controller:'Variants',
