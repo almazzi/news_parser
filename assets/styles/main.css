@@ -6,3 +6,32 @@
 .otdelna{
   margin: 10px 5px;
 }
+.heading {
+  background-color: #E5E4E4;
+}
+
+.description {
+  margin-top: 20px;
+}
+
+
+.fir  {
+  width: auto;
+  height : auto;
+  max-height: 100%;
+  max-width: 100%;
+}
+.magic-border{
+  box-shadow:3px 3px 5px 6px #ccc;
+}
+.no-padding{
+  padding: 0;
+}
+.tri-line {
+  text-overflow:ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  line-height: 16px;     /* fallback */
+  max-height: 108px;      /* fallback */
+  -webkit-line-clamp: 6; /* number of lines to show */
+  -webkit-box-orient: vertical;}

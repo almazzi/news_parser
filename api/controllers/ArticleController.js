@@ -11,7 +11,7 @@ module.exports = {
     //exec method can provide used data
     Article.find({published:false}).exec(function (err,articles) {
       if (err) return res.serverError(err);
-      return res.view('pokaji' ,{
+      return res.view('article/list' ,{
         'articles': articles
       });
     })},
@@ -22,13 +22,29 @@ module.exports = {
     }
     // params() function returns null when it does not find so it catches error
     //params method did not do it
+
     Article.destroy({id:req.param('id')}).exec(function(err, deleted){
       if(err){
         return res.serverError(err);
       }
       //after deletion redirect back
-      return res.redirect('/pokaji/');
+      return res.redirect('/list/');
     });
+  },
+  detail: function (req, res) {
+    if(!req.param('id')){
+      return res.badRequest("Id is not provided")
+    }
+    Article.find({id:req.param('id')}).exec(function(err,foundData){
+      if(err){
+        return res.serverError(err)
+      }
+      if(foundData){
+        res.view('article/detail',{
+          'detail':foundData
+        })
+      }
+    })
   }
 
 

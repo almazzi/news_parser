@@ -36,17 +36,39 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-'/search/:type/:text':{
+'POST /search/':{
   controller: 'Show',
   action:'check'
   },
- '/pokaji':{
+ '/list':{
     controller:'Article',
     action:'show'
   },
   '/delete/:id':{
     controller:'Article',
     action:'remove'
+  },
+  'GET /search/':{
+    view: 'searchpage'
+  },
+  '/detail/:id':{
+    controller:'Article',
+    action:'detail'
+  },
+  'GET /jade':{
+    view: 'inex'
+  },
+  'post /User': {
+    controller:'User',
+    action:'create'
+  },
+  '/logout': 'AuthController.logout',
+  'POST /login': 'AuthController.callback',
+  'POST /login/:action': 'AuthController.callback',
+  'POST /auth/local': 'AuthController.callback',
+  'POST /auth/local/:action': 'AuthController.callback',
+  '/shy':{
+    view:'shy'
   }
   //'/searchpage':{
   //  controller:'Variants',

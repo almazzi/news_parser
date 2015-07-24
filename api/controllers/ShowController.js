@@ -51,7 +51,7 @@ module.exports = {
                 }
                 else{
                   console.log('Everything is done');
-                  res.ok('It seems to be done ');
+                  res.redirect('/list/');
                 }
       });
 

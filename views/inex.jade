@@ -1,0 +1,20 @@
+extends check
+block append content
+  h1 appended line
+  p.
+    jade
+
+  .col-lg-4
+      p hello world
+  input(class='col-lg-4',name='login', type='text', placeholder='enter name')
+  -var foo='bar'
+  p=foo
+  if foo=='bar'
+   p yee
+  else
+   p noo
+  .col-lg-12
+  p I wonder what the weather is like today?
+  include widget
+
+

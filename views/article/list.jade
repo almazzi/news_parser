@@ -1,0 +1,16 @@
+extends ../layout
+block title
+  div.col-lg-offset-5 List of data
+block content
+  mixin news(article)
+    .col-md-4
+      ul.list-group.magic-border.no-padding
+        img(src='#{article.imgSource}',alt='',class='fir')
+        li(style='border:none',class='list-group-item heading') #{article.title}
+        li(class='description list-group-item tri-line',style='border:none') #{article.text}
+
+  div.container-fluid.list-inline
+    each val in articles
+      +news(val)
+block footer
+  .col-lg-12 this is footer
