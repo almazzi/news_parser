@@ -5,11 +5,34 @@ var async = require('async');
 var cheerio = require('cheerio');
 var querystring = require('querystring');
 var url = require('url');
+// Set the headers
 
-request('http://www.knews.kg//politics/66291_djoomart_otorbaev_v_2014_godu_zarabotal_na_80_tyis_somov_menshe_chem_prezident_almazbek_atambaev/',
-        function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-            var $ = cheerio.load(body);
-            console.log($('img.photo.image').attr('src'));
-          }});
+// Configure the request
 
+
+// Start the request
+
+
+
+
+
+var postData = querystring.stringify({
+  'txt' : 'президент'
+});
+
+var options = {
+  url:'http://knews.kg/poisk_po_sajtu/?txt=парламент',
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Content-Length': postData.length
+  }
+};
+
+request(options,
+  function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var $ = cheerio.load(body);
+      console.log($('div#content ul.newslist li div.info a.title').text());
+      console.log('/n');
+    }});

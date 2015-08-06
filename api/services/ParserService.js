@@ -45,15 +45,17 @@ ParserService = {
           ht=sails.config.sites.twentyfour;
             break;
       case 'knews':
-            options={
-              url:"http://knews.kg/poisk_po_sajtu/",
-              qs:{
-                txt:text
-              }
-            },
-              ht=sails.config.sites.knews;
+        options = {
+          url:'http://www.knews.kg/poisk_po_sajtu/',
+          qs:{
+            txt:text
+          },
+          method:'GET'
+          },
+              ht=sails.config.sites.knews
             break;
     }
+
     request(options,
       function (err, response, html) {
         var links = [];
@@ -62,15 +64,24 @@ ParserService = {
         }
         if (!err) {
           var $ = cheerio.load(html);
-          $(ht.iden.links).each(function (i, element) {
-            //some links does not contain http:
-            if(ht==sails.config.sites.twentyfour){
-              links.push('http://24.kg'+$(this).attr('href'));
-            }
-            else if(ht=sails.config.sites.knews){
-              links.push("http://knews.kg/"+$(this).attr('href'));
-            }
-          })
+          switch (ht){
+            case sails.config.sites.twentyfour:
+                  $(ht.iden.links).each(function(i,element)
+                  {
+                    links.push('http://24.kg'+$(this).attr('href'));
+                    })
+                  break;
+            case sails.config.sites.kabarlar:
+                  $(ht.iden.links).each(function (i,element) {
+                    links.push($(this).attr('href'));
+                  })
+                  break;
+            case sails.config.sites.knews:
+                  $(ht.iden.links).each(function (i,element) {
+                    links.push("http://knews.kg/"+$(this).attr('href'));
+                  })
+                  break;
+          }
           // we return links array with ht configurations
           callback(null, links,ht);
         }
@@ -78,7 +89,7 @@ ParserService = {
       })
   },
   // this function is last destination of pages it collects needed data
-  takeContent: function (link,ht, callback) {
+  takeContent: function (link, ht, callback) {
 
     request(link, function (err, response, html) {
 
@@ -89,7 +100,7 @@ ParserService = {
         var $ = cheerio.load(html);
         var st = {
           title: $(ht.iden.title).text(),
-          text: $(ht.iden.text).text(),
+          'text': $(ht.iden.text).text(),
           source: link
         };
 

@@ -7,8 +7,7 @@ block content
       ul.list-group.magic-border.no-padding
         img(src='#{article.imgSource}',alt='',class='fir')
         li(style='border:none',class='list-group-item heading') #{article.title}
-        li(class='description list-group-item tri-line',style='border:none') #{article.text}
-
+        li(class='description list-group-item tri-line',style='border:none') #{article.source}
   div.container-fluid.list-inline
     each val in articles
       +news(val)

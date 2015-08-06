@@ -25,9 +25,6 @@ module.exports = {
 
   beforeCreate:function(values, cb){
     values.text = values.text.replace(/(\r\n|\n|\r|\t)/gm,"");
-    if(values.imgSource){
-      values.imgSource = 'http://kabarlar.org'+values.imgSource;
-    }
     cb();
 
   }

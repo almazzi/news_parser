@@ -36,7 +36,7 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-'POST /search/':{
+'/search/:type/:txt':{
   controller: 'Show',
   action:'check'
   },
